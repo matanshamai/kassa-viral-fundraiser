@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect x="32" y="32" width="448" height="448" rx="90" fill="url(#mainGrad)"/>
+
+  <!-- Simple upward trending arrow (viral growth) -->
+  <path d="M 140 340 L 256 180 L 372 260"
+        stroke="#ffffff"
+        stroke-width="40"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- Arrow head -->
+  <path d="M 256 180 L 210 230 M 256 180 L 302 230"
+        stroke="#ffffff"
+        stroke-width="40"
+        stroke-linecap="round"
+        fill="none"/>
+
+  <!-- Three dots representing network/viral spread -->
+  <circle cx="140" cy="340" r="22" fill="#ffffff"/>
+  <circle cx="256" cy="180" r="22" fill="#ffffff"/>
+  <circle cx="372" cy="260" r="22" fill="#ffffff"/>
+
+  <!-- Dollar sign -->
+  <text x="256" y="430"
+        font-family="Arial, sans-serif"
+        font-size="140"
+        font-weight="bold"
+        fill="#ffffff"
+        text-anchor="middle">$</text>
+</svg>
