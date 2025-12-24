@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun --watch index.ts",
+    "start": "bun index.ts",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:reset": "bun reset.ts",
+    "db:seed": "bun seed.ts",
+    "db:seed:advanced": "bun seed-advanced.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "prisma": "5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@prisma/client": "5",
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  }
+}

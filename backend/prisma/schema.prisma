@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id         Int        @id @default(autoincrement())
+  username   String     @unique
+  referrerId Int?
+  referrer   User?      @relation("Referrals", fields: [referrerId], references: [id])
+  referrals  User[]     @relation("Referrals")
+  donations  Donation[]
+
+  @@index([referrerId])
+}
+
+model Donation {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
