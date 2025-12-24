@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { API } from '../../config/api';
 import CollapsibleCard from '../common/CollapsibleCard';
 import MoneyIcon from '../icons/MoneyIcon';
+import CheckCircleIcon from '../icons/CheckCircleIcon';
+import XCircleIcon from '../icons/XCircleIcon';
+import { formatNumber } from '../../utils/formatters';
 
 type DonationFormProps = {
   userId: number;
@@ -11,19 +14,39 @@ type DonationFormProps = {
 function DonationForm({ userId, onDonationSuccess }: DonationFormProps) {
   const [amount, setAmount] = useState('');
   const [isExpanded, setIsExpanded] = useState(true);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [donatedAmount, setDonatedAmount] = useState('');
 
   const handleDonate = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch(`${API}/donations`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId, amount }),
-    });
-    const data = await res.json();
-    setAmount('');
+    try {
+      const res = await fetch(`${API}/donations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, amount }),
+      });
 
-    if (data.amount) {
-      onDonationSuccess(parseFloat(data.amount));
+      if (!res.ok) {
+        setShowError(true);
+        setTimeout(() => setShowError(false), 3000);
+        return;
+      }
+
+      const data = await res.json();
+      const formattedAmount = formatNumber(parseFloat(data.amount), true);
+      setDonatedAmount(formattedAmount);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+      setAmount('');
+
+      if (data.amount) {
+        onDonationSuccess(parseFloat(data.amount));
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_err) {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
     }
   };
 
@@ -60,6 +83,24 @@ function DonationForm({ userId, onDonationSuccess }: DonationFormProps) {
         >
           Donate Now
         </button>
+
+        {showSuccess && (
+          <div className="p-2 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded text-xs flex items-center gap-2">
+            <CheckCircleIcon className="w-4 h-4" />
+            <span className="font-medium">
+              Thank you! We received your donation of ${donatedAmount}
+            </span>
+          </div>
+        )}
+
+        {showError && (
+          <div className="p-2 bg-red-50 border border-red-200 text-red-700 rounded text-xs flex items-center gap-2">
+            <XCircleIcon className="w-4 h-4" />
+            <span className="font-medium">
+              Sorry, something went wrong! Maybe try again?
+            </span>
+          </div>
+        )}
       </form>
     </CollapsibleCard>
   );
