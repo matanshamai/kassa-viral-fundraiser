@@ -32,8 +32,8 @@ function CollapsibleCard({
       </button>
 
       <div
-        className={`transition-all duration-300 ease-in-out ${
-          isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
+          isExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="p-4 pt-3 border-t border-gray-200">{children}</div>
