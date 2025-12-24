@@ -86,7 +86,6 @@ Both foreign keys are indexed for query performance. The summary endpoint uses a
   - Per-level breakdown (level 1 = direct referrals, level 2 = their referrals, etc.)
   - Total aggregated data of the entire tree (total referrals, total amount donated by them)
 - Optimistic UI updates on donation for faster performance
-- Dark mode toggle (dark mode always wins)
 
 ## Future Enhancements
 
@@ -97,6 +96,7 @@ Both foreign keys are indexed for query performance. The summary endpoint uses a
 - Multi campaign management
 - Leaderboard (Who's your most earning referrer, with their descendants taken into account)
 - Event driven UI updates (update summary if one of my descendants donated)
+- Dark mode toggle (dark mode always wins)
 
 **Auth & Security:**
 
