@@ -89,6 +89,11 @@ Both foreign keys are indexed for query performance. The summary endpoint uses a
   - Total aggregated data of the entire tree (total referrals, total amount donated by them)
 - Optimistic UI updates on donation for faster performance
 
+## Further Documentation
+
+- [Backend README](backend/README.md) - API endpoints, database schema, architecture decisions
+- [Frontend README](frontend/README.md) - Component structure, state management, UI patterns
+
 ## Future Enhancements
 
 **Features:**
