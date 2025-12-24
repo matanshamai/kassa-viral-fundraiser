@@ -8,7 +8,7 @@ A full-stack web app that tracks donations through a viral referral system. User
 
 ```bash
 # Clone the repo
-git clone <repository-url>
+git clone https://github.com/matanshamai/kassa-viral-fundraiser.git
 cd kassa-viral-fundraiser
 
 # Backend setup
