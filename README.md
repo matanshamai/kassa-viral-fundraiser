@@ -1,6 +1,7 @@
 # Viral Fundraiser Platform
 
 A full-stack web app that tracks donations through a viral referral system. Users can refer friends, make donations, and see their network's impact broken down by referral levels.
+
 [Full Demo Video on Loom](https://www.loom.com/share/e33a969fff924fbc8885ade1cb02aba1)
 
 ## Quick Start
