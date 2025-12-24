@@ -86,6 +86,7 @@ Both foreign keys are indexed for query performance. The summary endpoint uses a
   - Per-level breakdown (level 1 = direct referrals, level 2 = their referrals, etc.)
   - Total aggregated data of the entire tree (total referrals, total amount donated by them)
 - Optimistic UI updates on donation for faster performance
+- Dark mode toggle (dark mode always wins)
 
 ## Future Enhancements
 
