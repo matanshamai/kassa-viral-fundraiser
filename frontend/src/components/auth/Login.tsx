@@ -29,7 +29,10 @@ function Login({ onLogin }: { onLogin: (user: User) => void }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
+        <h1 className="text-2xl font-bold mb-1">
+          Login to access our fundraiser
+        </h1>
+        <p className="mb-4">If you're new here, we will sign you up</p>
         <input
           type="text"
           value={username}
