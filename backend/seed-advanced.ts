@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "./lib/prisma";
 
 // Helper to generate random number of referrals per user (decreases with depth)
 function getReferralCount(level: number): number {
