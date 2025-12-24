@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React dashboard for the viral fundraiser platform. Shows donation forms, referral links, and multi-level impact analytics.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19 + TypeScript** - Type-safe component development
+- **Vite** - Fast build tool with HMR
+- **Tailwind CSS v4** - Utility-first styling
+- **Custom components** - No external UI library
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Component structure:
+```
+src/
+├── components/
+│   ├── auth/Login.tsx           # Username login with referral capture
+│   ├── dashboard/
+│   │   ├── Dashboard.tsx        # Main layout
+│   │   ├── DonationForm.tsx     # Donation submission
+│   │   ├── ReferralShare.tsx    # Link generation + copy
+│   │   ├── ImpactSummary.tsx    # User stats
+│   │   └── ReferralTree.tsx     # Multi-level breakdown
+│   └── common/
+│       └── CollapsibleCard.tsx  # Reusable card component
+├── config/api.ts                # Backend endpoint config
+├── types/index.ts               # TypeScript types
+└── utils/formatters.ts          # Number formatting
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Design Decisions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**URL-based referral tracking** - Referral links use `?ref=userId` query param. Simple, shareable, works without backend changes.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Collapsible tree view** - Summary shows each referral level in an expandable card. Keeps UI clean when trees get deep.
+
+**No state library** - App is simple enough for React hooks. Avoids Redux/Zustand overhead.
+
+**Type-safe API calls** - Centralized config and typed responses prevent runtime errors.
+
+## Features
+
+- Username-only login (creates account if new)
+- Captures referrer from URL on signup
+- Donation form with validation
+- Referral link generation and copy-to-clipboard
+- Impact summary showing:
+  - Your total donations
+  - Total referrals count
+  - Total raised by your network
+- Per-level breakdown:
+  - Level 1 = people you referred
+  - Level 2 = people they referred
+  - etc.
+  - Shows user count and total $ per level
+
+## Setup
+
+Requires backend running on `http://localhost:3000`.
+
+```bash
+bun install
+bun run dev       # Starts on http://localhost:5173
 ```
+
+## Build
+
+```bash
+bun run build     # Output to dist/
+bun run preview   # Preview production build
+```
+
+## UX Notes
+
+- Responsive design (mobile-first with Tailwind)
+- Cards collapse/expand to manage info density
+- Copy button shows success feedback
+- Average donation calculated per level
